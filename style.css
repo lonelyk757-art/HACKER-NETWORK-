@@ -1,0 +1,441 @@
+:root {
+    --bg-color: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --text-color: #e0e0e0;
+    --accent-red: #ff4d4d;
+    --accent-blue: #00aaff;
+    --accent-green: #00ff41;
+    --accent-purple: #d946ef;
+    --card-bg: #1a1a1a;
+    --border-color: #333;
+    --hover-glow: rgba(0, 255, 65, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-green);
+    text-decoration: none;
+    text-shadow: 0 0 10px var(--accent-green);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-green);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-green);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* ===== HEADER/HERO ===== */
+header {
+    text-align: center;
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+h1 {
+    font-size: 3.5rem;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px var(--accent-green);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 20px var(--accent-green); }
+    50% { text-shadow: 0 0 40px var(--accent-green); }
+}
+
+.tagline {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--accent-green);
+    color: #000;
+}
+
+.btn-primary:hover {
+    background: #00cc33;
+    box-shadow: 0 0 30px var(--accent-green);
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--accent-green);
+    border: 2px solid var(--accent-green);
+}
+
+.btn-secondary:hover {
+    background: var(--accent-green);
+    color: #000;
+    box-shadow: 0 0 30px var(--accent-green);
+}
+
+/* ===== SECTIONS ===== */
+section {
+    margin: 4rem 0;
+}
+
+section h2 {
+    font-size: 2.5rem;
+    color: var(--accent-green);
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+section h3 {
+    font-size: 1.8rem;
+    color: var(--accent-green);
+    margin: 1.5rem 0 1rem 0;
+}
+
+/* ===== CARDS ===== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-green);
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card p {
+    color: #aaa;
+    line-height: 1.8;
+}
+
+.red-team {
+    border-left: 5px solid var(--accent-red);
+}
+
+.red-team:hover {
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
+}
+
+.blue-team {
+    border-left: 5px solid var(--accent-blue);
+}
+
+.blue-team:hover {
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+}
+
+/* ===== AGREEMENT SECTION ===== */
+.agreement-section {
+    background: #111;
+    padding: 3rem;
+    border: 2px solid var(--accent-green);
+    border-radius: 8px;
+    margin: 4rem 0;
+}
+
+.agreement-section h3 {
+    color: var(--accent-green);
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.agreement-list {
+    list-style: none;
+}
+
+.agreement-list li {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.agreement-list li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.agreement-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-weight: bold;
+    color: var(--accent-green);
+    font-size: 1.1rem;
+}
+
+/* ===== LEARNING PATH ===== */
+.learning-path {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.learning-step {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    background: var(--accent-green);
+    color: #000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-blue);
+}
+
+.step-content h4 {
+    color: var(--accent-blue);
+    margin-bottom: 0.5rem;
+}
+
+/* ===== OPPORTUNITIES ===== */
+.opportunity-card {
+    background: linear-gradient(135deg, rgba(255, 77, 77, 0.1), rgba(0, 170, 255, 0.1));
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.opportunity-card:hover {
+    transform: translateX(10px);
+    border-color: var(--accent-green);
+}
+
+.opportunity-card h4 {
+    color: var(--accent-green);
+    margin-bottom: 0.5rem;
+}
+
+.opportunity-type {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--accent-red);
+    color: #000;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.opportunity-type.blue {
+    background: var(--accent-blue);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #555;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 4rem;
+}
+
+.footer-content {
+    margin-bottom: 1.5rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links a {
+    color: var(--accent-green);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #00cc33;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .learning-step {
+        flex-direction: column;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .agreement-section {
+        padding: 1.5rem;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card, .learning-step, .opportunity-card {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* ===== CODE BLOCK STYLING ===== */
+.code-block {
+    background: #000;
+    border: 1px solid var(--accent-green);
+    padding: 1.5rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.code-block code {
+    color: var(--accent-green);
+}
+
