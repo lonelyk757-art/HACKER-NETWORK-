@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Network | Learn to Hack & Meet Opportunities</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-color: #e0e0e0;
+            --accent-red: #ff4d4d;
+            --accent-blue: #00aaff;
+            --accent-green: #00ff41;
+            --accent-purple: #d946ef;
+            --card-bg: #1a1a1a;
+            --border-color: #333;
+            --hover-glow: rgba(0, 255, 65, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-green);
+            text-decoration: none;
+            text-shadow: 0 0 10px var(--accent-green);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HEADER/HERO ===== */
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px var(--accent-green);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px var(--accent-green); }
+            50% { text-shadow: 0 0 40px var(--accent-green); }
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-green);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #00cc33;
+            box-shadow: 0 0 30px var(--accent-green);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-green);
+            border: 2px solid var(--accent-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-green);
+            color: #000;
+            box-shadow: 0 0 30px var(--accent-green);
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            margin: 4rem 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        section h3 {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        /* ===== CARDS ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-green);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card p {
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        .red-team {
+            border-left: 5px solid var(--accent-red);
+        }
+
+        .red-team:hover {
+            box-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
+        }
+
+        .blue-team {
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .blue-team:hover {
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+        }
+
+        /* ===== AGREEMENT SECTION ===== */
+        .agreement-section {
+            background: #111;
+            padding: 3rem;
+            border: 2px solid var(--accent-green);
+            border-radius: 8px;
+            margin: 4rem 0;
+        }
+
+        .agreement-section h3 {
+            color: var(--accent-green);
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .agreement-list {
+            list-style: none;
+        }
+
+        .agreement-list li {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .agreement-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .agreement-footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-weight: bold;
+            color: var(--accent-green);
+            font-size: 1.1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #555;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #00cc33;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .agreement-section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: slideIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">⚡ HACKER NETWORK</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="red-team.html">Red Team</a></li>
+                <li><a href="blue-team.html">Blue Team</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header>
+        <h1>Hacker Network</h1>
+        <p class="tagline">Learn to hack and meet opportunities</p>
+        <p class="subtitle">Join a community of ethical hackers, security researchers, and cybersecurity professionals</p>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- TEAM OVERVIEW -->
+        <section>
+            <h2>Our Approach</h2>
+            <div class="card-grid">
+                <div class="card red-team">
+                    <h3>🔴 Red Team</h3>
+                    <p>Master offensive security techniques, penetration testing, and exploit development. Learn how attackers think to build better defenses.</p>
+                    <a href="red-team.html" class="btn btn-secondary">Explore Red Team</a>
+                </div>
+                <div class="card blue-team">
+                    <h3>🔵 Blue Team</h3>
+                    <p>Specialize in defensive security, incident response, and infrastructure hardening. Protect critical systems and detect threats.</p>
+                    <a href="blue-team.html" class="btn btn-secondary">Explore Blue Team</a>
+                </div>
+                <div class="card">
+                    <h3>🟣 Purple Team</h3>
+                    <p>Bridge the gap between offense and defense. Collaborate with both teams to strengthen your organization's security posture.</p>
+                    <a href="learning.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETHICAL USE AGREEMENT -->
+        <section class="agreement-section">
+            <h3>Ethical Use Agreement</h3>
+            <ul class="agreement-list">
+                <li><strong>Comply with Laws</strong> – Use only where explicitly authorized.</li>
+                <li><strong>Do No Harm</strong> – Never disrupt systems, steal data, or exploit vulnerabilities without permission.</li>
+                <li><strong>Educate & Research</strong> – Apply tools solely for learning, ethical hacking, or securing systems you own/control.</li>
+                <li><strong>Stay Accountable</strong> – Misuse is your responsibility; we ban violators and report illegal activity.</li>
+            </ul>
+            <p class="agreement-footer">Tools are for defense, education, and ethical practice—not malice.</p>
+        </section>
+
+        <!-- QUICK STATS -->
+        <section>
+            <h2>Why Join?</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>📚 Learn</h3>
+                    <p>Access structured learning paths from beginner to advanced levels. Master ethical hacking, penetration testing, and defensive security.</p>
+                </div>
+                <div class="card">
+                    <h3>🤝 Network</h3>
+                    <p>Connect with experienced security professionals, researchers, and like-minded individuals passionate about cybersecurity.</p>
+                </div>
+                <div class="card">
+                    <h3>💼 Opportunities</h3>
+                    <p>Discover job listings, internships, research collaborations, and CTF competitions to advance your career.</p>
+                </div>
+                <div class="card">
+                    <h3>🛡️ Secure</h3>
+                    <p>Join a community committed to ethical practices and responsible disclosure. We prioritize security and accountability.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section style="text-align: center; padding: 3rem 0;">
+            <h2>Ready to Join?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Connect with the Hacker Network community on WhatsApp and start your journey today.</p>
+            <a href="https://whatsapp.com/channel/0029VbAH7YzHbFV1Sa4c980d" class="btn btn-primary" target="_blank">Join WhatsApp Channel</a>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Hacker Network. All rights reserved.</p>
+            <p>Dedicated to ethical hacking, cybersecurity education, and responsible disclosure.</p>
+        </div>
+        <div class="footer-links">
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="https://whatsapp.com/channel/0029VbAH7YzHbFV1Sa4c980d" target="_blank">WhatsApp Channel</a>
+        </div>
+    </footer>
+
+</body>
+  </html>
+
