@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Team | Hacker Network</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-color: #e0e0e0;
+            --accent-red: #ff4d4d;
+            --accent-blue: #00aaff;
+            --accent-green: #00ff41;
+            --accent-purple: #d946ef;
+            --card-bg: #1a1a1a;
+            --border-color: #333;
+            --hover-glow: rgba(0, 255, 65, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-green);
+            text-decoration: none;
+            text-shadow: 0 0 10px var(--accent-green);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HEADER/HERO ===== */
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px var(--accent-green);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px var(--accent-green); }
+            50% { text-shadow: 0 0 40px var(--accent-green); }
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-green);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #00cc33;
+            box-shadow: 0 0 30px var(--accent-green);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-green);
+            border: 2px solid var(--accent-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-green);
+            color: #000;
+            box-shadow: 0 0 30px var(--accent-green);
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            margin: 4rem 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        section h3 {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        /* ===== CARDS ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-green);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card p {
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        .red-team {
+            border-left: 5px solid var(--accent-red);
+        }
+
+        .red-team:hover {
+            box-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
+        }
+
+        .blue-team {
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .blue-team:hover {
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #555;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #00cc33;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: slideIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">⚡ HACKER NETWORK</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="red-team.html">Red Team</a></li>
+                <li><a href="blue-team.html">Blue Team</a></li>
+                <li><a href="learning.html">Learn</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <h1>🔴 Red Team</h1>
+        <p class="tagline">Offensive Security & Penetration Testing</p>
+        <p class="subtitle">Master the art of ethical hacking and learn how attackers operate</p>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- OVERVIEW -->
+        <section>
+            <h2>What is Red Team?</h2>
+            <div class="card">
+                <p>Red Team operations involve authorized, simulated attacks on systems to identify vulnerabilities before malicious actors do. Red teamers think like attackers, use offensive tools, and develop exploits to strengthen security defenses.</p>
+                <p style="margin-top: 1rem;">Our Red Team community focuses on:</p>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li>Penetration Testing & Vulnerability Assessment</li>
+                    <li>Exploit Development & Reverse Engineering</li>
+                    <li>Social Engineering & Physical Security</li>
+                    <li>Web Application Security & API Testing</li>
+                    <li>Network Reconnaissance & Lateral Movement</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CORE SKILLS -->
+        <section>
+            <h2>Core Red Team Skills</h2>
+            <div class="card-grid">
+                <div class="card red-team">
+                    <h3>Reconnaissance</h3>
+                    <p>Gather intelligence about target systems using OSINT, network scanning, and passive information gathering techniques.</p>
+                </div>
+                <div class="card red-team">
+                    <h3>Scanning & Enumeration</h3>
+                    <p>Identify open ports, services, and vulnerabilities using tools like Nmap, Shodan, and specialized scanners.</p>
+                </div>
+                <div class="card red-team">
+                    <h3>Exploitation</h3>
+                    <p>Develop and execute exploits to gain unauthorized access and demonstrate security weaknesses.</p>
+                </div>
+                <div class="card red-team">
+                    <h3>Post-Exploitation</h3>
+                    <p>Maintain access, escalate privileges, and gather sensitive data to demonstrate impact and risk.</p>
+                </div>
+                <div class="card red-team">
+                    <h3>Reporting</h3>
+                    <p>Document findings, explain vulnerabilities, and provide actionable recommendations for remediation.</p>
+                </div>
+                <div class="card red-team">
+                    <h3>Tool Mastery</h3>
+                    <p>Proficiency with Metasploit, Burp Suite, Wireshark, Kali Linux, and custom exploitation frameworks.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- POPULAR TOOLS -->
+        <section>
+            <h2>Essential Red Team Tools</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Metasploit Framework</h3>
+                    <p>The industry-standard penetration testing framework with thousands of exploits and payloads.</p>
+                </div>
+                <div class="card">
+                    <h3>Burp Suite</h3>
+                    <p>Comprehensive web application security testing tool for finding vulnerabilities in web apps and APIs.</p>
+                </div>
+                <div class="card">
+                    <h3>Nmap</h3>
+                    <p>Network mapper for discovering hosts, services, and vulnerabilities on networks.</p>
+                </div>
+                <div class="card">
+                    <h3>Wireshark</h3>
+                    <p>Network protocol analyzer for capturing and analyzing network traffic.</p>
+                </div>
+                <div class="card">
+                    <h3>Kali Linux</h3>
+                    <p>Specialized Linux distribution pre-loaded with penetration testing and ethical hacking tools.</p>
+                </div>
+                <div class="card">
+                    <h3>Social-Engineer Toolkit</h3>
+                    <p>Framework for social engineering attacks and awareness training.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ATTACK VECTORS -->
+        <section>
+            <h2>Common Attack Vectors</h2>
+            <div class="card">
+                <h3>Web Application Attacks</h3>
+                <p>SQL Injection, Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and authentication bypasses.</p>
+            </div>
+            <div class="card" style="margin-top: 1rem;">
+                <h3>Network Attacks</h3>
+                <p>Man-in-the-Middle (MITM), DNS Spoofing, ARP Poisoning, and network sniffing.</p>
+            </div>
+            <div class="card" style="margin-top: 1rem;">
+                <h3>Social Engineering</h3>
+                <p>Phishing, pretexting, baiting, and tailgating to manipulate people into divulging sensitive information.</p>
+            </div>
+            <div class="card" style="margin-top: 1rem;">
+                <h3>Privilege Escalation</h3>
+                <p>Techniques to elevate user privileges to administrator or root level access.</p>
+            </div>
+            <div class="card" style="margin-top: 1rem;">
+                <h3>Malware Development</h3>
+                <p>Creating custom malware, trojans, and backdoors for testing and research purposes.</p>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS -->
+        <section>
+            <h2>Recommended Certifications</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>CEH (Certified Ethical Hacker)</h3>
+                    <p>Industry-recognized certification covering penetration testing methodologies and tools.</p>
+                </div>
+                <div class="card">
+                    <h3>OSCP (Offensive Security Certified Professional)</h3>
+                    <p>Hands-on certification requiring practical penetration testing skills and proof of competency.</p>
+                </div>
+                <div class="card">
+                    <h3>GPEN (GIAC Penetration Tester)</h3>
+                    <p>Advanced penetration testing certification from GIAC focusing on real-world scenarios.</p>
+                </div>
+                <div class="card">
+                    <h3>eJPT (eLearnSecurity Junior Penetration Tester)</h3>
+                    <p>Entry-level certification perfect for beginners starting their penetration testing journey.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; padding: 3rem 0;">
+            <h2>Join the Red Team</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Connect with offensive security professionals and learn advanced penetration testing techniques.</p>
+            <a href="https://whatsapp.com/channel/0029VbAH7YzHbFV1Sa4c980d" class="btn btn-primary" target="_blank">Join WhatsApp Channel</a>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Hacker Network. All rights reserved.</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="blue-team.html">Blue Team</a>
+            <a href="learning.html">Learning</a>
+            <a href="https://whatsapp.com/channel/0029VbAH7YzHbFV1Sa4c980d" target="_blank">WhatsApp</a>
+        </div>
+    </footer>
+
+</body>
+  </html>
+                  
